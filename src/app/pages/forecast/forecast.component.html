@@ -1,0 +1,65 @@
+<div class="flex justify-content-center">
+  <div class="flex-column">
+    <p-card
+      header="Прогноз гидродинамических процессов на Каспийском море"
+      [style]="{ width: '900px' }">
+      <div class="flex">
+        <form
+          [formGroup]="forecast_form"
+          (ngSubmit)="onSubmit()"
+          class="flex justify-content-center w-10">
+          <div class="w-10">
+            <div class="flex justify-content-between align-items-center mb-3">
+              <span>Характеристика: </span>
+              <p-dropdown
+                [options]="characteristics"
+                optionLabel="name"
+                formControlName="characteristic_id"
+                optionValue="id"></p-dropdown>
+            </div>
+            <div class="flex justify-content-between align-items-center mb-3">
+              <span>Дата:</span>
+              <p-calendar
+                formControlName="date"
+                [showIcon]="true"
+                [showButtonBar]="true">
+                <ng-template let-date pTemplate="date">
+                  <span>{{ date.day }}</span>
+                  <span
+                    *ngIf="
+                      analyzed_dates.includes(
+                        date.month + 1 + '/' + date.day + '/' + date.year
+                      )
+                    "
+                    class="red_dot"></span>
+                </ng-template>
+              </p-calendar>
+
+              <span>Время</span>
+              <p-dropdown
+                [options]="intervals"
+                optionLabel="value"
+                formControlName="time"
+                optionValue="value"></p-dropdown>
+            </div>
+            <div class="flex justify-content-between align-items-center">
+              <span>Пункт наблюдения:</span>
+              <p-dropdown
+                formControlName="observation_post_id"
+                optionValue="id"
+                [options]="observation_posts"
+                optionLabel="name"></p-dropdown>
+            </div>
+            <div class="flex justify-content-center pt-4">
+              <p-button type="submit" label="Показать"></p-button>
+            </div>
+          </div>
+        </form>
+        <div>
+          <p-image width="300px" height="400px" [src]="photo_path"></p-image>
+        </div>
+      </div>
+    </p-card>
+    <p-chart type="bar" [data]="data" [options]="options" [height]=""></p-chart>
+  </div>
+</div>

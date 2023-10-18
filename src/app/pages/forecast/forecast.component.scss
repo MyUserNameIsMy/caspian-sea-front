@@ -1,0 +1,18 @@
+::ng-deep .hour input {
+  width: 100px !important;
+  height: 50px !important;
+}
+::ng-deep .p-datepicker table td > span {
+  position: relative;
+}
+.red_dot {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background-color: red;
+  border-radius: 50%;
+}
